@@ -9,5 +9,8 @@
 <body>
     <h1></h1>
 </body>
-<script src="/src/js/App.js"></script>
+<script>
+    var userInfo = localStorage.getItem('userInfo');
+    document.querySelector('h1').innerHTML = "ID: "+ JSON.parse(userInfo).uid; 
+</script>
 </html>

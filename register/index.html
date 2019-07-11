@@ -3,10 +3,43 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
+    <title>Register</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" type='text/css' media='screen' href="/src/css/global.css">
 </head>
 <body>
-    <h1>peido</h1>
+        <div class="container">
+
+                <div class="card">
+                    <h1 class="title">Create Account</h1>
+                    <div class="card-content">
+        
+                        <input type="email" name="email" id="email" placeholder="Email">
+                        <input type="password" name="password" id="password" placeholder="Password">
+                        <button id="submitHandler">Register</button>
+                        <br>
+                        <a href="/" class="subtitle">Back</a>
+                    </div>
+                </div>
+            </div>
 </body>
+<script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-auth.js"></script>
+
+<script src="/src/js/App.js"></script>
+<script src="/src/js/User.js"></script>
+<script>
+    localStorage.removeItem('userInfo');
+
+
+    btnSubmit = document.getElementById('submitHandler');
+
+    btnSubmit.addEventListener('click', () => {
+        const user = new User();
+        user.email = document.getElementById('email').value;
+        user.password = document.getElementById('password').value;
+        user.create();
+    });
+</script>
 </html>

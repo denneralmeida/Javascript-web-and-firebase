@@ -1,33 +1,38 @@
 class User {
     constructor(email, password) {
-        this.id;
         this.email = email;
         this.password = password;
     }
 
-    logar = () => {
-        window.location.href = "/sign-in";
-        return;
+    logIn() {
         firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(result => {
-            alert(result.user.uid);
-            
+            const { uid, email } = result.user;
+            let info = {
+                uid,
+                email,
+            }
+            localStorage.setItem('userInfo', JSON.stringify(info));
+            window.location.href = '/sign-in';
         }).catch(error => {
             alert(error.message);
         });
     };
 
-    static getInfo = () => { return this.id };
+    create() {
+        firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(result => {
+            const { uid, email } = result.user;
+            let info = {
+                uid,
+                email,
+            }
+            localStorage.setItem('userInfo', JSON.stringify(info));
+            window.location.href = '/sign-in';
+        }).catch(error => {
+            alert(error.message);
+        });
+    }
 }
 
-btnSubmit = document.getElementById('submitHandler');
-
-btnSubmit.addEventListener('click', () => {
-    const user = new User();
-    user.email = document.getElementById('email').value;
-    user.password = document.getElementById('password').value;
-    user.logar();
-  
-});
 
 
 
